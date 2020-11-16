@@ -1,0 +1,6 @@
+PRE=anbossar
+RG=$PRE-appconfig-examples
+APPCNAME=$PRE-appconfig
+L=westeurope
+az group create --location $L --name $RG
+az appconfig create -g $RG -n $APPCNAME -l $L --sku free --assign-identity
