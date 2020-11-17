@@ -5,7 +5,9 @@ APPCNAME=$PRE-appconfig
 KVNAME=$PRE-kv-shared
 ACRNAME=$PRE"acrconf"
 DBNAME=db
-STATICIPNAME=abossarip
+IMAGENAME=kittyme
+IMAGEPATH=$ACRNAME.azurecr.io/$IMAGENAME
+#STATICIPNAME=abossarip
 AKSNAME=$PRE"cluster"
 L=westeurope
 az group create --location $L --name $RG
@@ -15,50 +17,47 @@ az keyvault create -g $RG -n $KVNAME --enable-soft-delete false --enabled-for-de
 az cosmosdb create -n $PRE-db -g $RG --kind mongodb 
 az cosmosdb mongodb database create -a $PRE-db -n $DBNAME -g $RG --throughput 400
 az cosmosdb mongodb collection create -a $PRE-db --resource-group $RG --database-name $DBNAME -n Conversations --shard "ConversationKey"
-az network public-ip create -g $RG -n $STATICIPNAME --sku Standard --allocation-method static
-IP=`az network public-ip show -g $RG -n $STATICIPNAME --query ipAddress --output tsv`
+#az network public-ip create -g $RG -n $STATICIPNAME --sku Standard --allocation-method static
+#IP=`az network public-ip show -g $RG -n $STATICIPNAME --query ipAddress --output tsv`
 AKS_VERSION=`az aks get-versions -l $L --query "orchestrators[?isPreview==null].orchestratorVersion | sort(@) | [-1]" -o tsv`
 az aks create -g $RG -l $L -n $AKSNAME --attach-acr $ACRNAME -a monitoring --enable-managed-identity --generate-ssh-keys -k $AKS_VERSION -c 2 -s Standard_D2as_v4 -z 1 2
 az resource list -n $AKSNAME --query [*].identity.principalId --out tsv
-PID=`az aks show -g $RG -n $AKSNAME --query "identity.principalId" -o tsv`
+#PID=`az aks show -g $RG -n $AKSNAME --query "identity.principalId" -o tsv`
 az aks get-credentials -g $RG -n $AKSNAME
-RG_ID=`az group show -n $RG --query id -o tsv`
-az role assignment create --assignee $PID --role "Contributor" --scope "."$RG_ID
+#RG_ID=`az group show -n $RG --query id -o tsv`
+#az role assignment create --assignee $PID --role "Network Contributor" --scope "."$RG_ID
+az acr build -r $ACRNAME ../KittyMeWebApp -t $IMAGENAME:latest -t $IMAGENAME:{{.Run.ID}}
 cat <<EOF >./k_service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    service.beta.kubernetes.io/azure-load-balancer-resource-group: $RG
   name: azure-load-balancer
 spec:
-  loadBalancerIP: $IP
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    app: azure-load-balancer
+    app: $IMAGENAME
 EOF
-cat <<EOF >./k_deployment-nginx.yaml
+cat <<EOF >./k_deployment-$IMAGENAME.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: $IMAGENAME-deployment
 spec:
   selector:
     matchLabels:
-      app: azure-load-balancer
+      app: $IMAGENAME
   replicas: 6
   template:
     metadata:
       labels:
-        app: azure-load-balancer
+        app: $IMAGENAME
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: $IMAGENAME
+        image: $IMAGEPATH:latest
         ports:
         - containerPort: 80
 EOF
 kubectl apply -f .
-
