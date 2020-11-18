@@ -10,56 +10,86 @@ IMAGEPATH=$ACRNAME.azurecr.io/$IMAGENAME
 #STATICIPNAME=abossarip
 AKSNAME=$PRE"cluster"
 L=westeurope
+az feature register --name EnableEphemeralOSDiskPreview --namespace Microsoft.ContainerService
+az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/EnableEphemeralOSDiskPreview')].{Name:name,State:properties.state}"
+az provider register --namespace Microsoft.ContainerService
 az group create --location $L --name $RG
 az appconfig create -g $RG -n $APPCNAME -l $L --sku free --assign-identity &
 az acr create -n $ACRNAME -g $RG --sku Basic -l $L &
 az keyvault create -g $RG -n $KVNAME --enable-soft-delete false --enabled-for-deployment false --enabled-for-disk-encryption false -l $L --sku standard &
-az cosmosdb create -n $PRE-db -g $RG --kind mongodb 
-az cosmosdb mongodb database create -a $PRE-db -n $DBNAME -g $RG --throughput 400
-az cosmosdb mongodb collection create -a $PRE-db --resource-group $RG --database-name $DBNAME -n Conversations --shard "ConversationKey"
+az keyvault secret set --vault-name $KVNAME --name "letmetellyou" --value "When getting bananas I can't tear them apart. It's like they're family"
+
+#az cosmosdb create -n $PRE-db -g $RG --kind mongodb 
+#az cosmosdb mongodb database create -a $PRE-db -n $DBNAME -g $RG --throughput 400
+#az cosmosdb mongodb collection create -a $PRE-db --resource-group $RG --database-name $DBNAME -n Conversations --shard "ConversationKey"
 #az network public-ip create -g $RG -n $STATICIPNAME --sku Standard --allocation-method static
 #IP=`az network public-ip show -g $RG -n $STATICIPNAME --query ipAddress --output tsv`
 AKS_VERSION=`az aks get-versions -l $L --query "orchestrators[?isPreview==null].orchestratorVersion | sort(@) | [-1]" -o tsv`
-az aks create -g $RG -l $L -n $AKSNAME --attach-acr $ACRNAME -a monitoring --enable-managed-identity --generate-ssh-keys -k $AKS_VERSION -c 2 -s Standard_D2as_v4 -z 1 2
+az aks create -g $RG -l $L -n $AKSNAME --attach-acr $ACRNAME -a monitoring --enable-managed-identity --generate-ssh-keys -k $AKS_VERSION -c 2 -s Standard_D2as_v4 -z 1 2 --node-osdisk-type Ephemeral
 az resource list -n $AKSNAME --query [*].identity.principalId --out tsv
 #PID=`az aks show -g $RG -n $AKSNAME --query "identity.principalId" -o tsv`
 az aks get-credentials -g $RG -n $AKSNAME
 #RG_ID=`az group show -n $RG --query id -o tsv`
 #az role assignment create --assignee $PID --role "Network Contributor" --scope "."$RG_ID
 az acr build -r $ACRNAME ../KittyMeWebApp -t $IMAGENAME:latest -t $IMAGENAME:{{.Run.ID}}
-cat <<EOF >./k_service.yaml
+cat <<EOF >./k_secret.yaml
 apiVersion: v1
-kind: Service
+kind: Secret
 metadata:
-  name: azure-load-balancer
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-  selector:
-    app: $IMAGENAME
+  name: appconfig
+type: Opaque
+stringData:
+  AppConfig: $ENDPOINT
 EOF
-cat <<EOF >./k_deployment-$IMAGENAME.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: $IMAGENAME-deployment
-spec:
-  selector:
-    matchLabels:
-      app: $IMAGENAME
-  replicas: 6
-  template:
-    metadata:
-      labels:
-        app: $IMAGENAME
-    spec:
-      containers:
-      - name: $IMAGENAME
-        image: $IMAGEPATH:latest
-        ports:
-        - containerPort: 80
+for tenant in kittyme doggyme
+do
+  cat <<EOF >./k_service-$tenant.yaml
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: $tenant-load-balancer
+  spec:
+    type: LoadBalancer
+    ports:
+    - port: 80
+    selector:
+      app: $tenant
 EOF
+  cat <<EOF >./k_deployment-$IMAGENAME-$tenant.yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: $tenant-deployment
+  spec:
+    selector:
+      matchLabels:
+        app: $tenant
+    replicas: 6
+    template:
+      metadata:
+        labels:
+          app: $tenant
+      spec:
+        containers:
+        - name: $IMAGENAME
+          image: $IMAGEPATH:latest
+          ports:
+          - containerPort: 80
+          env:
+          - name: tenant
+            value: $tenant
+          - name: AppConfig
+            valueFrom:
+              secretKeyRef:
+                name: appconfig
+                key: AppConfig
+EOF
+az appconfig kv set -n $APPCNAME --key $tenant:Settings:BackgroundColor --label production  -y --tags theme=light --value '#FFF'
+az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontColor --label production  -y --tags theme=light --value '#000'
+az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontSize --label production  -y --tags theme=light --value 24
+az appconfig kv set -n $APPCNAME --key $tenant:Settings:Message --label production  -y --tags language=en --value "Data from Azure App Configuration"
+
+done
 kubectl apply -f .
 az appconfig kv set -n $APPCNAME --key KittyMe:Settings:BackgroundColor --label production  -y --tags theme=light --value '#FFF'
 az appconfig kv set -n $APPCNAME --key KittyMe:Settings:FontColor --label production  -y --tags theme=light --value '#000'
