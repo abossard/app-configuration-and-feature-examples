@@ -78,7 +78,7 @@ EOF
           env:
           - name: tenant
             value: $tenant
-          - name: AppConfig
+          - name: ConnectionStrings__AppConfig
             valueFrom:
               secretKeyRef:
                 name: appconfig
