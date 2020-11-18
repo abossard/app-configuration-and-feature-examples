@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
-namespace configapp
+
+namespace KittyMeWebApp
 {
     public class Program
     {
@@ -19,8 +21,12 @@ namespace configapp
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
+                webBuilder.ConfigureAppConfiguration(config =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    var settings = config.AddEnvironmentVariables().Build();
+                    var appConfigEndpoint = settings.GetConnectionString("AppConfig");
+                    config.AddAzureAppConfiguration(appConfigEndpoint);
+                    config.AddEnvironmentVariables();
+                }).UseStartup<Startup>());
     }
 }

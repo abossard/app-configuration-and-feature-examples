@@ -1,6 +1,6 @@
 using System;
 
-namespace configapp
+namespace KittyMeWebApp
 {
     public class WeatherForecast
     {

@@ -1,12 +1,16 @@
+using System;
+using System.IO;
+using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace configapp
+namespace KittyMeWebApp
 {
     public class Startup
     {
@@ -23,10 +27,7 @@ namespace configapp
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,10 +41,10 @@ namespace configapp
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

@@ -1,6 +1,6 @@
 {
-  "short_name": "configapp",
-  "name": "configapp",
+  "short_name": "kittymewebapp",
+  "name": "kittymewebapp",
   "icons": [
     {
       "src": "favicon.ico",
