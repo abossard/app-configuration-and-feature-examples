@@ -1,6 +1,4 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
-RUN apt-get install -y nodejs
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
