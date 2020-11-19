@@ -1,0 +1,9 @@
+PRE=anbossar
+RG=$PRE-appconfig-examples
+APPCNAME=$PRE-appconfig
+
+az appconfig revision list -n $APPCNAME -o tsv
+az appconfig revision list -n $APPCNAME --key doggyme:* --label '' -o tsv
+az appconfig revision list -n $APPCNAME --key doggyme:Settings:Message --label '' -o tsv
+az appconfig kv export --help
+az appconfig kv export -n $APPCNAME --label beta -d file --path config_export.json --format json --skip-features
