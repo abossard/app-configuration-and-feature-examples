@@ -62,10 +62,10 @@ EOF
                 name: appconfig
                 key: AppConfig
 EOF
-#az appconfig kv set -n $APPCNAME --key $tenant:Settings:BackgroundColor   -y --tags theme=light --value '#FFF'
-#az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontColor  -y --tags theme=light --value '#000'
-#az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontSize   -y --tags theme=light --value 24
-#az appconfig kv set -n $APPCNAME --key $tenant:Settings:Message -y --tags language=en --value "Data from Azure App Configuration"
+az appconfig kv set -n $APPCNAME --key $tenant:Settings:BackgroundColor   -y --tags theme=light --value '#FFF' --label $stage
+az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontColor  -y --tags theme=light --value '#000' --label $stage
+az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontSize   -y --tags theme=light --value 24 --label $stage
+az appconfig kv set -n $APPCNAME --key $tenant:Settings:Message -y --tags language=en --value "Data from Azure App Configuration"  --label $stage
 
 done
 done
