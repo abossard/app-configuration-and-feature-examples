@@ -1,0 +1,72 @@
+DOCKER_BUILDKIT=1 DOCKER_HOST=tcp://192.168.159.129:2376 docker build -t $IMAGEPATH ../KittyMeWebApp
+DOCKER_BUILDKIT=1 DOCKER_HOST=tcp://192.168.159.129:2376 docker push $IMAGEPATH
+#az acr build -r $ACRNAME ../KittyMeWebApp -t $IMAGENAME:latest -t $IMAGENAME:{{.Run.ID}}
+az acr repository show -n $ACRNAME --repository $IMAGENAME 
+az acr repository --help
+
+#BUILDID=`az acr repository show-tags -n $ACRNAME --repository $IMAGENAME --query "[?@ != 'latest']|[-1]" -o tsv`
+DIGEST=`az acr repository show-manifests -n $ACRNAME --repository $IMAGENAME --orderby time_desc --top 1 --query "[].digest|[-1]"  -o tsv`
+cat <<EOF >./k_secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: appconfig
+type: Opaque
+stringData:
+  AppConfig: $ENDPOINT
+EOF
+for tenant in kittyme doggyme
+do
+for stage in beta production
+do
+  cat <<EOF >./k_service-$tenant-$stage.yaml
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: $tenant-$stage-load-balancer
+  spec:
+    type: LoadBalancer
+    ports:
+    - port: 80
+    selector:
+      app: $tenant-$stage
+EOF
+  cat <<EOF >./k_deployment-$IMAGENAME-$tenant-$stage.yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: $tenant-$stage-deployment
+  spec:
+    selector:
+      matchLabels:
+        app: $tenant-$stage
+    replicas: 6
+    template:
+      metadata:
+        labels:
+          app: $tenant-$stage
+      spec:
+        containers:
+        - name: $IMAGENAME
+          image: $IMAGEPATH@$DIGEST
+          ports:
+          - containerPort: 80
+          env:
+          - name: tenant
+            value: $tenant
+          - name: stage
+            value: $stage
+          - name: ConnectionStrings__AppConfig
+            valueFrom:
+              secretKeyRef:
+                name: appconfig
+                key: AppConfig
+EOF
+#az appconfig kv set -n $APPCNAME --key $tenant:Settings:BackgroundColor   -y --tags theme=light --value '#FFF'
+#az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontColor  -y --tags theme=light --value '#000'
+#az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontSize   -y --tags theme=light --value 24
+#az appconfig kv set -n $APPCNAME --key $tenant:Settings:Message -y --tags language=en --value "Data from Azure App Configuration"
+
+done
+done
+kubectl apply -f .
