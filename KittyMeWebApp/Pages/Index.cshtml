@@ -1,10 +1,19 @@
 ﻿@page
+@using Microsoft.Extensions.Configuration
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = @ViewData["Message"];
 }
-
+<style>
+    body {
+        background-image: url("@ViewData["BackgroundUrl"]");
+    }
+    h1 {
+            color: @ViewData["FontColor"];
+            background-color: @ViewData["BackgroundColor"];
+            font-size: @ViewData["FontSize"]px;
+        }
+</style>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">@ViewData["Message"]</h1>
 </div>

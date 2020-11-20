@@ -26,21 +26,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcc752b4-dfaf-45d0-8154-8eb6c65698be" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/public/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/src/components/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/src/components/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/src/components/NavMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/src/components/NavMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/WeatherForecastController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/WeatherForecastController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KittyMeWebApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KittyMeWebApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Error.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Error.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/_ViewImports.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Settings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KittyMeWebApp.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KittyMeWebApp.dir/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KittyMeWebApp.dir/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KittyMeWebApp.dir/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KittyMeWebApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KittyMeWebApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Shared/_Layout.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WeatherForecast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WeatherForecast.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../infrastructure/setup.azcli" beforeDir="false" afterPath="$PROJECT_DIR$/../infrastructure/setup.azcli" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,36 +46,36 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/FD80CE14-9604-4ED8-A69D-6C1727AD8286/1/SpaStaticFilesExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/WeatherForecast.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/F3DD31A3-D437-4D7D-9525-D887480DAE95/3A0/StreamReader.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/F6282D2A-7AAF-419A-A90B-A5F5F5F0E860/9/StaticFileExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/F6282D2A-7AAF-419A-A90B-A5F5F5F0E860/A/StaticFileOptions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Properties/launchSettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/_ViewImports.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3152A975-472F-4B35-B978-712B757F8C40/5b/ad937350/AzureAppConfigurationRefreshOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Error.cshtml.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ClientApp/public/manifest.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/034C43B2-BBE2-4B60-A21D-8F2B621749F8/1D/HttpResponse.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3152A975-472F-4B35-B978-712B757F8C40/29/2e46f562/AzureAppConfigurationExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3152A975-472F-4B35-B978-712B757F8C40/5d/f10071f6/AzureAppConfigurationOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WeatherForecast.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Controllers/WeatherForecastController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ClientApp/package.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ClientApp/package-lock.json" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Properties/launchSettings.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
-    <changedPaths>
-      <option value="$PROJECT_DIR$/Program.cs" />
-      <option value="$PROJECT_DIR$/WeatherForecast.cs" />
-      <option value="$PROJECT_DIR$/Properties/launchSettings.json" />
-      <option value="$PROJECT_DIR$/Pages/_ViewImports.cshtml" />
-      <option value="$PROJECT_DIR$/Pages/Error.cshtml.cs" />
-      <option value="$PROJECT_DIR$/ClientApp/package.json" />
-      <option value="$PROJECT_DIR$/ClientApp/package-lock.json" />
-      <option value="$PROJECT_DIR$/ClientApp/src/components/NavMenu.tsx" />
-      <option value="$PROJECT_DIR$/ClientApp/public/index.html" />
-      <option value="$PROJECT_DIR$/ClientApp/public/manifest.json" />
-      <option value="$PROJECT_DIR$/Startup.cs" />
-      <option value="$PROJECT_DIR$/Pages/Index.cshtml.cs" />
-      <option value="$PROJECT_DIR$/Controllers/WeatherForecastController.cs" />
-    </changedPaths>
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/appsettings.json" />
+        <option value="$PROJECT_DIR$/Startup.cs" />
+        <option value="$PROJECT_DIR$/Program.cs" />
+        <option value="$PROJECT_DIR$/Settings.cs" />
+        <option value="$PROJECT_DIR$/Pages/Index.cshtml.cs" />
+        <option value="$PROJECT_DIR$/Pages/Shared/_Layout.cshtml" />
+        <option value="$PROJECT_DIR$/Pages/Index.cshtml" />
+      </list>
+    </option>
   </component>
   <component name="ProjectId" id="1kQ10ODoIpMeAo7TsaHSoWHkTJI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -90,8 +85,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3493609" />
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34987593" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.05955335" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -156,6 +151,7 @@
       <workItem from="1605621175930" duration="144000" />
       <workItem from="1605621558117" duration="1349000" />
       <workItem from="1605623622617" duration="7547000" />
+      <workItem from="1605830964374" duration="3300000" />
     </task>
     <servers />
   </component>
@@ -178,5 +174,95 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="615" y="407" key="#xdebugger.evaluate" timestamp="1605833654914">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="615" y="407" key="#xdebugger.evaluate/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833654914" />
+    <state width="837" height="509" key="GridCell.Tab.0.bottom" timestamp="1605833832107">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833832107" />
+    <state width="837" height="509" key="GridCell.Tab.0.center" timestamp="1605833832107">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833832107" />
+    <state width="837" height="509" key="GridCell.Tab.0.left" timestamp="1605833832107">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833832107" />
+    <state width="837" height="509" key="GridCell.Tab.0.right" timestamp="1605833832107">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833832107" />
+    <state width="837" height="509" key="GridCell.Tab.1.bottom" timestamp="1605833835698">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833835698" />
+    <state width="837" height="509" key="GridCell.Tab.1.center" timestamp="1605833835698">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833835698" />
+    <state width="837" height="509" key="GridCell.Tab.1.left" timestamp="1605833835698">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833835698" />
+    <state width="837" height="509" key="GridCell.Tab.1.right" timestamp="1605833835698">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833835698" />
+    <state width="837" height="509" key="GridCell.Tab.2.bottom" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.2.bottom/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.2.center" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.2.center/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.2.left" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.2.left/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.2.right" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.2.right/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.3.bottom" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.3.bottom/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.3.center" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.3.center/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.3.left" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.3.left/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.3.right" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.3.right/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.4.bottom" timestamp="1605833831894">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.4.bottom/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831894" />
+    <state width="837" height="509" key="GridCell.Tab.4.center" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.4.center/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.4.left" timestamp="1605833831893">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.4.left/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831893" />
+    <state width="837" height="509" key="GridCell.Tab.4.right" timestamp="1605833831894">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="837" height="509" key="GridCell.Tab.4.right/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833831894" />
+    <state width="867" height="703" key="XDebugger.FullValuePopup" timestamp="1605833190466">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="867" height="703" key="XDebugger.FullValuePopup/0.0.3440.1400/3440.0.1920.1080@0.0.3440.1400" timestamp="1605833190466" />
   </component>
 </project>

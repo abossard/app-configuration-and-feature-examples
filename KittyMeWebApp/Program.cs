@@ -25,8 +25,31 @@ namespace KittyMeWebApp
                 {
                     var settings = config.AddEnvironmentVariables().Build();
                     var appConfigEndpoint = settings.GetConnectionString("AppConfig");
-                    config.AddAzureAppConfiguration(appConfigEndpoint);
-                    config.AddEnvironmentVariables();
+                    var tenant = settings["tenant"];
+                    var stage = settings["stage"];
+                    config.AddAzureAppConfiguration(options =>
+                    {
+                        options.Connect(appConfigEndpoint)
+                            .Select($"{tenant}:*")
+                            .Select($"{tenant}:*", stage)
+                            .ConfigureRefresh((refreshOptions) =>
+                        {
+                            // Indicates that all configuration should be refreshed when the given key has changed.
+                            refreshOptions.Register(key: $"{tenant}:Sentinel", refreshAll:true).SetCacheExpiration(new TimeSpan(0,0,10));
+                        });;
+                    });
+                    /*config.AddAzureAppConfiguration(options =>
+                    {
+                        options.Connect(appConfigEndpoint)
+                            .Select($"{tenant}:*", stage)
+                            .Select($"{tenant}:*")
+                            .Select($"*")
+                            .ConfigureRefresh((refreshOptions) =>
+                            {
+                                // Indicates that all configuration should be refreshed when the given key has changed.
+                                refreshOptions.Register(key: $"{tenant}:Sentinel", refreshAll: true);
+                            });
+                    });*/
                 }).UseStartup<Startup>());
     }
 }
