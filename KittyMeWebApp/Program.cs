@@ -41,7 +41,7 @@ namespace KittyMeWebApp
                         {
                             // Indicates that all configuration should be refreshed when the given key has changed.
                             refreshOptions.Register(key: $"{tenant}:Sentinel", refreshAll:true).SetCacheExpiration(new TimeSpan(0,0,10));
-                        });;
+                        });
                     });
                 }).UseStartup<Startup>());
     }
