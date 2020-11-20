@@ -1,8 +1,8 @@
 DOCKER_BUILDKIT=1 DOCKER_HOST=tcp://192.168.159.129:2376 docker build -t $IMAGEPATH ../KittyMeWebApp
 DOCKER_BUILDKIT=1 DOCKER_HOST=tcp://192.168.159.129:2376 docker push $IMAGEPATH
 #az acr build -r $ACRNAME ../KittyMeWebApp -t $IMAGENAME:latest -t $IMAGENAME:{{.Run.ID}}
-az acr repository show -n $ACRNAME --repository $IMAGENAME 
-az acr repository --help
+#az acr repository show -n $ACRNAME --repository $IMAGENAME 
+#az acr repository --help
 
 #BUILDID=`az acr repository show-tags -n $ACRNAME --repository $IMAGENAME --query "[?@ != 'latest']|[-1]" -o tsv`
 DIGEST=`az acr repository show-manifests -n $ACRNAME --repository $IMAGENAME --orderby time_desc --top 1 --query "[].digest|[-1]"  -o tsv`
@@ -54,11 +54,6 @@ EOF
                 name: appconfig
                 key: AppConfig
 EOF
-#az appconfig kv set -n $APPCNAME --key $tenant:Settings:BackgroundColor   -y --tags theme=light --value '#FFF' --label $stage
-#az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontColor  -y --tags theme=light --value '#000' --label $stage
-#az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontSize   -y --tags theme=light --value 24 --label $stage
-#az appconfig kv set -n $APPCNAME --key $tenant:Settings:Message -y --tags language=en --value "Data from Azure App Configuration"  --label $stage
-
 done
 done
 kubectl apply -f .
