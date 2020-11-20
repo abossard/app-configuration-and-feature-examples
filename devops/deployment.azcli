@@ -6,15 +6,7 @@ az acr repository --help
 
 #BUILDID=`az acr repository show-tags -n $ACRNAME --repository $IMAGENAME --query "[?@ != 'latest']|[-1]" -o tsv`
 DIGEST=`az acr repository show-manifests -n $ACRNAME --repository $IMAGENAME --orderby time_desc --top 1 --query "[].digest|[-1]"  -o tsv`
-cat <<EOF >./k_secret.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: appconfig
-type: Opaque
-stringData:
-  AppConfig: $ENDPOINT
-EOF
+
 for tenant in kittyme doggyme
 do
 for stage in beta production
@@ -62,11 +54,12 @@ EOF
                 name: appconfig
                 key: AppConfig
 EOF
-az appconfig kv set -n $APPCNAME --key $tenant:Settings:BackgroundColor   -y --tags theme=light --value '#FFF' --label $stage
-az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontColor  -y --tags theme=light --value '#000' --label $stage
-az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontSize   -y --tags theme=light --value 24 --label $stage
-az appconfig kv set -n $APPCNAME --key $tenant:Settings:Message -y --tags language=en --value "Data from Azure App Configuration"  --label $stage
+#az appconfig kv set -n $APPCNAME --key $tenant:Settings:BackgroundColor   -y --tags theme=light --value '#FFF' --label $stage
+#az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontColor  -y --tags theme=light --value '#000' --label $stage
+#az appconfig kv set -n $APPCNAME --key $tenant:Settings:FontSize   -y --tags theme=light --value 24 --label $stage
+#az appconfig kv set -n $APPCNAME --key $tenant:Settings:Message -y --tags language=en --value "Data from Azure App Configuration"  --label $stage
 
 done
 done
 kubectl apply -f .
+rm -f k_*.yaml
