@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.FeatureManagement;
+using Microsoft.FeatureManagement.FeatureFilters;
 
 namespace KittyMeWebApp
 {
@@ -27,7 +28,9 @@ namespace KittyMeWebApp
             services.AddRazorPages();
             services.AddControllers();
             services.AddAzureAppConfiguration();
-            services.AddFeatureManagement();
+            services.AddFeatureManagement()
+                .AddFeatureFilter<PercentageFilter>()
+                .AddFeatureFilter<TimeWindowFilter>();
 
             services.Configure<Settings>(Configuration.GetSection($"{Configuration["tenant"]}:Settings"));
         }
