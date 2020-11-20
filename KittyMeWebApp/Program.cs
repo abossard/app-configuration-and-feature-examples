@@ -32,24 +32,17 @@ namespace KittyMeWebApp
                         options.Connect(appConfigEndpoint)
                             .Select($"{tenant}:*")
                             .Select($"{tenant}:*", stage)
+                            .UseFeatureFlags(options =>
+                            {
+                                options.Label = stage;
+                                options.CacheExpirationInterval = new TimeSpan(0,0, 10);
+                            })
                             .ConfigureRefresh((refreshOptions) =>
                         {
                             // Indicates that all configuration should be refreshed when the given key has changed.
                             refreshOptions.Register(key: $"{tenant}:Sentinel", refreshAll:true).SetCacheExpiration(new TimeSpan(0,0,10));
                         });;
                     });
-                    /*config.AddAzureAppConfiguration(options =>
-                    {
-                        options.Connect(appConfigEndpoint)
-                            .Select($"{tenant}:*", stage)
-                            .Select($"{tenant}:*")
-                            .Select($"*")
-                            .ConfigureRefresh((refreshOptions) =>
-                            {
-                                // Indicates that all configuration should be refreshed when the given key has changed.
-                                refreshOptions.Register(key: $"{tenant}:Sentinel", refreshAll: true);
-                            });
-                    });*/
                 }).UseStartup<Startup>());
     }
 }

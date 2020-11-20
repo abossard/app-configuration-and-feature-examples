@@ -16,4 +16,8 @@
 </style>
 <div class="text-center">
     <h1 class="display-4">@ViewData["Message"]</h1>
+    <feature name="MakeSound">
+            <audio id="player" src="@ViewData["SoundUrl"]"></audio>
+            <button onclick="document.getElementById('player').play()" >@ViewData["SoundLabel"]</button>
+    </feature>
 </div>

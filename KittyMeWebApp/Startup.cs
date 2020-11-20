@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.FeatureManagement;
 
 namespace KittyMeWebApp
 {
@@ -26,6 +27,8 @@ namespace KittyMeWebApp
             services.AddRazorPages();
             services.AddControllers();
             services.AddAzureAppConfiguration();
+            services.AddFeatureManagement();
+
             services.Configure<Settings>(Configuration.GetSection($"{Configuration["tenant"]}:Settings"));
         }
 

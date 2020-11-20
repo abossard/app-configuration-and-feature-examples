@@ -27,6 +27,9 @@ namespace KittyMeWebApp.Pages
             ViewData["FontSize"] = _settings.FontSize;
             ViewData["FontColor"] = _settings.FontColor;
             ViewData["Message"] = _settings.Message;
+            ViewData["SoundUrl"] = _settings.SoundUrl ?? "https://raw.githubusercontent.com/prof3ssorSt3v3/media-sample-files/master/hal-9000.mp3";
+            ViewData["SoundLabel"] = _settings.SoundLabel ?? "MakeSound Beta";
         }
     }
 }
+

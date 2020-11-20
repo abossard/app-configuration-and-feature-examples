@@ -7,6 +7,8 @@ namespace KittyMeWebApp
         public long FontSize { get; set; }
         public string FontColor { get; set; }
         public string Message { get; set; }
+        public string SoundUrl { get; set; }
+        public string SoundLabel { get; set; }
 
     }
 }
