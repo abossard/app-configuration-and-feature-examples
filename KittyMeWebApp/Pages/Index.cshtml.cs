@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.FeatureManagement;
 
 namespace KittyMeWebApp.Pages
 {
@@ -13,11 +14,13 @@ namespace KittyMeWebApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly Settings _settings;
+        private readonly IFeatureManager _featureManager;
 
-        public IndexModel(ILogger<IndexModel> logger, IOptionsSnapshot<Settings> settings)
+        public IndexModel(ILogger<IndexModel> logger, IOptionsSnapshot<Settings> settings, IFeatureManager featureManager)
         {
             _logger = logger;
             _settings = settings.Value;
+            _featureManager = featureManager;
         }
 
         public void OnGet()
