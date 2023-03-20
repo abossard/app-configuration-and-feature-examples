@@ -1,7 +1,7 @@
-DOCKER_BUILDKIT=1 DOCKER_HOST=tcp://192.168.159.129:2376 docker build -t $IMAGEPATH ../KittyMeWebApp
-DOCKER_BUILDKIT=1 DOCKER_HOST=tcp://192.168.159.129:2376 docker push $IMAGEPATH
-#az acr build -r $ACRNAME ../KittyMeWebApp -t $IMAGENAME:latest -t $IMAGENAME:{{.Run.ID}}
-#az acr repository show -n $ACRNAME --repository $IMAGENAME 
+# DOCKER_BUILDKIT=1 DOCKER_HOST=tcp://192.168.159.129:2376 docker build -t $IMAGEPATH ../KittyMeWebApp
+# DOCKER_BUILDKIT=1 DOCKER_HOST=tcp://192.168.159.129:2376 docker push $IMAGEPATH
+az acr build -r $ACRNAME ../KittyMeWebApp -t $IMAGENAME:latest -t $IMAGENAME:{{.Run.ID}}
+az acr repository show -n $ACRNAME --repository $IMAGENAME 
 #az acr repository --help
 
 #BUILDID=`az acr repository show-tags -n $ACRNAME --repository $IMAGENAME --query "[?@ != 'latest']|[-1]" -o tsv`
@@ -32,7 +32,7 @@ EOF
     selector:
       matchLabels:
         app: $tenant-$stage
-    replicas: 6
+    replicas: 2
     template:
       metadata:
         labels:

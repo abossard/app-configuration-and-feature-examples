@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # add an annotation indicating the issuer to use.
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: kittyme-site
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kittyme.xyz
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: kittyme-production-load-balancer
+            port:
+              number: 80
+  - host: beta.kittyme.xyz
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: kittyme-beta-load-balancer
+            port:
+              number: 80
+  - host: doggyme.xyz
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: doggyme-production-load-balancer
+            port:
+              number: 80
+  - host: beta.doggyme.xyz
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: doggyme-beta-load-balancer
+            port:
+              number: 80
+  tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
+  - hosts:
+    - kittyme.xyz
+    - doggyme.xyz
+    - beta.kittyme.xyz
+    - beta.doggyme.xyz
+    secretName: website-cert 

@@ -37,6 +37,7 @@ namespace KittyMeWebApp
                             })
                             .ConfigureRefresh((refreshOptions) =>
                         {
+                            refreshOptions.SetCacheExpiration(new TimeSpan(0,1,0));
                             // Indicates that all configuration should be refreshed when the given key has changed.
                             refreshOptions.Register(key: $"{tenant}:Sentinel", refreshAll:true).SetCacheExpiration(new TimeSpan(0,0,10));
                         });
