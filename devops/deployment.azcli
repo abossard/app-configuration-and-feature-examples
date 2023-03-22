@@ -16,6 +16,7 @@ do
   kind: Service
   metadata:
     name: $tenant-$stage-load-balancer
+    namespace: kittyme
   spec:
     type: LoadBalancer
     ports:
@@ -27,6 +28,7 @@ EOF
   apiVersion: apps/v1
   kind: Deployment
   metadata:
+    namespace: kittyme
     name: $tenant-$stage-deployment
   spec:
     selector:

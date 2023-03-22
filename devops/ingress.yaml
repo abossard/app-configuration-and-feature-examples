@@ -5,7 +5,7 @@ metadata:
     # add an annotation indicating the issuer to use.
     cert-manager.io/cluster-issuer: letsencrypt
   name: kittyme-site
-  namespace: default
+  namespace: kittyme
 spec:
   ingressClassName: nginx
   rules:
