@@ -1,0 +1,12 @@
+dependencies:
+- name: child-chart
+  repository: file://../child-chart
+  version: 0.1.0
+- name: child-chart
+  repository: file://../child-chart
+  version: 0.1.0
+- name: mariadb
+  repository: https://charts.bitnami.com/bitnami
+  version: 11.5.5
+digest: sha256:c56d35990b5e3b72a0fa21d48ec2ca1e652481f5ba1549b3d27d9f2f221226a1
+generated: "2023-03-23T15:59:06.709581+01:00"

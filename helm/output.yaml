@@ -1,0 +1,236 @@
+---
+# Source: kitty-chart/charts/doggyme/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mykitty-doggyme
+  labels:
+    helm.sh/chart: doggyme-0.1.0
+    app.kubernetes.io/name: doggyme
+    app.kubernetes.io/instance: mykitty
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: doggyme
+    app.kubernetes.io/instance: mykitty
+---
+# Source: kitty-chart/charts/kittyme/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mykitty-kittyme
+  labels:
+    helm.sh/chart: kittyme-0.1.0
+    app.kubernetes.io/name: kittyme
+    app.kubernetes.io/instance: mykitty
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: kittyme
+    app.kubernetes.io/instance: mykitty
+---
+# Source: kitty-chart/charts/doggyme/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mykitty-doggyme
+  labels:
+    helm.sh/chart: doggyme-0.1.0
+    app.kubernetes.io/name: doggyme
+    app.kubernetes.io/instance: mykitty
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: doggyme
+      app.kubernetes.io/instance: mykitty
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: doggyme
+        app.kubernetes.io/instance: mykitty
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      containers:
+        - name: doggyme
+          securityContext:
+            {}
+          image: "anbossaracrconf.azurecr.io/kittyme:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+---
+# Source: kitty-chart/charts/kittyme/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mykitty-kittyme
+  labels:
+    helm.sh/chart: kittyme-0.1.0
+    app.kubernetes.io/name: kittyme
+    app.kubernetes.io/instance: mykitty
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kittyme
+      app.kubernetes.io/instance: mykitty
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kittyme
+        app.kubernetes.io/instance: mykitty
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      containers:
+        - name: kittyme
+          securityContext:
+            {}
+          image: "anbossaracrconf.azurecr.io/kittyme:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+---
+# Source: kitty-chart/charts/doggyme/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mykitty-doggyme
+  labels:
+    helm.sh/chart: doggyme-0.1.0
+    app.kubernetes.io/name: doggyme
+    app.kubernetes.io/instance: mykitty
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  tls:
+    - hosts:
+        - "doggyme.xyz"
+      secretName: doggyme-certificate-tls
+  rules:
+    - host: "doggyme.xyz"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mykitty-doggyme
+                port:
+                  number: 80
+---
+# Source: kitty-chart/charts/kittyme/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mykitty-kittyme
+  labels:
+    helm.sh/chart: kittyme-0.1.0
+    app.kubernetes.io/name: kittyme
+    app.kubernetes.io/instance: mykitty
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  tls:
+    - hosts:
+        - "kittyme.xyz"
+      secretName: kittyme-certificate-tls
+  rules:
+    - host: "kittyme.xyz"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mykitty-kittyme
+                port:
+                  number: 80
+---
+# Source: kitty-chart/charts/doggyme/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "mykitty-doggyme-test-connection"
+  labels:
+    helm.sh/chart: doggyme-0.1.0
+    app.kubernetes.io/name: doggyme
+    app.kubernetes.io/instance: mykitty
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['mykitty-doggyme:80']
+  restartPolicy: Never
+---
+# Source: kitty-chart/charts/kittyme/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "mykitty-kittyme-test-connection"
+  labels:
+    helm.sh/chart: kittyme-0.1.0
+    app.kubernetes.io/name: kittyme
+    app.kubernetes.io/instance: mykitty
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['mykitty-kittyme:80']
+  restartPolicy: Never

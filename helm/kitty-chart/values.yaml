@@ -1,0 +1,41 @@
+appConfigEndpoint: https://kittyme-appconfig.azconfig.io
+
+kittyme:
+  tenant: kittyme
+  stage: production
+  image:
+    repository: anbossaracrconf.azurecr.io/kittyme
+    tag: "cb2"
+  ingress:
+    hosts:
+    - host: kittyme.xyz
+      paths:
+      - path: /new
+        pathType: Prefix
+    tls:
+    - secretName: kittyme-certificate-tls
+      hosts:
+      - kittyme.xyz
+
+doggyme:
+  tenant: doggyme
+  stage: production
+  image:
+    repository: anbossaracrconf.azurecr.io/kittyme
+    tag: "cb2"
+  ingress:
+    hosts:
+    - host: doggyme.xyz
+      paths:
+      - path: /new
+        pathType: Prefix
+    tls:
+    - secretName: doggyme-certificate-tls
+      hosts:
+      - doggyme.xyz
+
+mariadb:
+  auth:
+    password: Eed9cheida7kizoc1ohs5woh
+    rootPassword: Eed9cheida7kizoc1ohs5woh
+    existingSecret: false
